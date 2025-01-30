@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
+// src/Home.tsx
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 
 const images = [
   "/images/slide1.jpg",
@@ -8,7 +7,7 @@ const images = [
   "/images/slide3.jpg",
 ]; // Update paths based on your assets
 
-const Home = () => {
+const Home: React.FC = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -21,59 +20,48 @@ const Home = () => {
 
   return (
     <div className="relative w-full h-screen">
-      {/* Background Image Animation with adjusted padding-top */}
-      <motion.div
-        key={index}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
+      {/* Background Image with adjusted height */}
+      <div
+        className={`absolute top-0 left-0 w-full h-1/3 bg-cover bg-center transition-opacity duration-1000 ease-in-out`}
         style={{ 
           backgroundImage: `url(${images[index]})`,
-          paddingTop: "30%", // Adjust the padding-top here
+          opacity: 1,
         }}
-      ></motion.div>
+      ></div>
 
       {/* Overlay for Darker Effect */}
       <div className="absolute inset-0 bg-black/50"></div>
 
-      {/* Transparent Navigation Bar */}
-      <Navbar />
-      {/* <nav className="absolute top-0 w-full flex justify-between items-center px-8 py-4 bg-transparent text-white">
-        <h1 className="text-3xl font-bold">Filmance Studio</h1>
-        <ul className="flex gap-6">
-          <li className="hover:text-gray-300 cursor-pointer">Home</li>
-          <li className="hover:text-gray-300 cursor-pointer">Services</li>
-          <li className="hover:text-gray-300 cursor-pointer">Portfolio</li>
-          <li className="hover:text-gray-300 cursor-pointer">Contact</li>
-        </ul>
-      </nav> */}
-
       {/* Welcoming Message */}
       <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
-        <motion.h1
-          className="text-5xl font-extrabold drop-shadow-md"
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
+        <h1 className="text-5xl font-extrabold drop-shadow-md transition-transform duration-1000 ease-in-out transform translate-y-0">
           Capture Every Beautiful Moment
-        </motion.h1>
-        <motion.p
-          className="text-lg mt-3 max-w-xl"
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-        >
+        </h1>
+        <p className="text-lg mt-3 max-w-xl transition-transform duration-1000 ease-in-out transform translate-y-0">
           Let us create stunning photography that tells your story.
-        </motion.p>
-        <motion.button
-          className="mt-6 px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        </p>
+        <button className="mt-6 px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all">
           View Portfolio
-        </motion.button>
+        </button>
+      </div>
+
+      {/* Key Photography Categories */}
+      <div className="absolute bottom-0 left-0 w-full bg-white text-black p-4">
+        <h2 className="text-2xl font-bold text-center">Photography Categories</h2>
+        <div className="flex justify-around mt-4">
+          <div className="text-center">
+            <h3 className="font-semibold">Weddings</h3>
+            <p>Capturing your special day.</p>
+          </div>
+          <div className="text-center">
+            <h3 className="font-semibold">Portraits</h3>
+            <p>Beautiful portraits for every occasion.</p>
+          </div>
+          <div className="text-center">
+            <h3 className="font-semibold">Events</h3>
+            <p>Memories from your events.</p>
+          </div>
+        </div>
       </div>
     </div>
   );

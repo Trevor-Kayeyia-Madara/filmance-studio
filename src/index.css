@@ -1,1 +1,19 @@
 @import "tailwindcss";
+/* src/index.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1, p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
