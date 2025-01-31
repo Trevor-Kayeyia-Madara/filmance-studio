@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import "../styles/navbar.css";
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className="navbar">
+      <div className="logo">Filmance Studio</div>
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/services">Services</Link></li>
