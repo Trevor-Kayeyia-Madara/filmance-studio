@@ -1,70 +1,72 @@
 // src/Home.tsx
-import { useState, useEffect } from "react";
 
-const images = [
-  "/images/slide1.jpg",
-  "/images/slide2.JPG",
-  "/images/slide3.jpg",
-]; // Update paths based on your assets
+import { ServiceCard } from "../components/ServiceCard";
+import { FeatureCard } from "../components/FeatureCard";
+import { Footer } from "../components/Footer";
+import {services, features} from '../data/content'
+
 
 const Home: React.FC = () => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000); // Change image every 4 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="relative w-full h-screen">
-      {/* Background Image with adjusted height */}
-      <div
-        className={`absolute top-0 left-0 w-full h-1/3 bg-cover bg-center transition-opacity duration-1000 ease-in-out`}
-        style={{ 
-          backgroundImage: `url(${images[index]})`,
-          opacity: 1,
-        }}
-      ></div>
+    <div className="flex overflow-hidden flex-col bg-white">
+      <header className="flex justify-between items-center px-10 py-3 border-b border-solid border-b-gray-200 max-md:px-5 max-md:py-3">
+        <div className="flex gap-4 items-center">
+          <i className="ti ti-camera" />
+          <div className="text-lg font-bold text-zinc-900">Filmance Studio</div>
+        </div>
+        <nav className="flex gap-8 items-center">
+          <div className="flex gap-9 items-center max-sm:hidden">
+            {['Services', 'Portfolio', 'Pricing', 'FAQs'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-sm font-medium text-zinc-900"
+                tabIndex={0}
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+          <button className="px-4 py-2 text-sm font-bold text-center text-gray-50 bg-fuchsia-800 rounded-3xl">
+            Book Now
+          </button>
+        </nav>
+      </header>
 
-      {/* Overlay for Darker Effect */}
-      <div className="absolute inset-0 bg-black/50"></div>
-
-      {/* Welcoming Message */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
-        <h1 className="text-5xl font-extrabold drop-shadow-md transition-transform duration-1000 ease-in-out transform translate-y-0">
-          Capture Every Beautiful Moment
+      <div className="flex flex-col justify-center items-center p-10 text-center text-white bg-center bg-cover bg-[url('https://placehold.co/1280x512/1a0d1c/1a0d1c')] min-h-[512px]">
+        <h1 className="mb-4 text-5xl font-black tracking-tighter leading-none max-w-[800px] max-sm:text-3xl">
+          Professional Photography Services
         </h1>
-        <p className="text-lg mt-3 max-w-xl transition-transform duration-1000 ease-in-out transform translate-y-0">
-          Let us create stunning photography that tells your story.
+        <p className="mb-8 text-base leading-6 max-w-[600px] max-sm:text-sm">
+          We provide premium photography services for weddings, events, portraits, and more. Our team of experienced photographers will capture the moments that matter most to you.
         </p>
-        <button className="mt-6 px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all">
-          View Portfolio
+        <button className="px-6 py-3 text-base font-bold text-gray-50 bg-fuchsia-800 rounded-3xl">
+          Get Started
         </button>
       </div>
 
-      {/* Key Photography Categories */}
-      <div className="absolute bottom-0 left-0 w-full bg-white text-black p-4">
-        <h2 className="text-2xl font-bold text-center">Photography Categories</h2>
-        <div className="flex justify-around mt-4">
-          <div className="text-center">
-            <h3 className="font-semibold">Weddings</h3>
-            <p>Capturing your special day.</p>
-          </div>
-          <div className="text-center">
-            <h3 className="font-semibold">Portraits</h3>
-            <p>Beautiful portraits for every occasion.</p>
-          </div>
-          <div className="text-center">
-            <h3 className="font-semibold">Events</h3>
-            <p>Memories from your events.</p>
-          </div>
+      <div className="px-40 py-10 max-md:px-5 max-md:py-10">
+        <h2 className="mb-6 text-2xl font-bold text-zinc-900">
+          Explore Photography Services
+        </h2>
+        <div className="grid gap-3 grid-cols-[repeat(5,1fr)] max-md:grid-cols-[repeat(2,1fr)] max-sm:grid-cols-[1fr]">
+          {services.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
+        </div>
+
+        <h2 className="mb-6 text-2xl font-bold text-zinc-900">
+          Why Choose Filmance Studio?
+        </h2>
+        <div className="grid gap-3 mt-6 grid-cols-[repeat(5,1fr)] max-md:grid-cols-[repeat(2,1fr)] max-sm:grid-cols-[1fr]">
+          {features.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
+          ))}
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
-
 export default Home;
